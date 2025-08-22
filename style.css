@@ -1,0 +1,355 @@
+/* ==========================================================================
+   1. Global Styles & Typography
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Apply the default font defined in the Tailwind config (Libertinus Sans) */
+body {
+    font-family: theme('fontFamily.sans');
+}
+
+/* Apply the heading font to all heading tags */
+h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.heading');
+}
+
+.animate-counter {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==========================================================================
+   2. Animations & Transitions
+   ========================================================================== */
+
+/* ... (rest of your CSS remains the same) ... */
+
+.hero-bg-animated {
+    background: linear-gradient(135deg, #0A2540 0%, #1D4ED8 100%);
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #0A2540 0%, #1D4ED8 100%); }
+    25% { background: linear-gradient(135deg, #1D4ED8 0%, #14B8A6 100%); }
+    50% { background: linear-gradient(135deg, #14B8A6 0%, #D4AF37 100%); }
+    75% { background: linear-gradient(135deg, #D4AF37 0%, #0A2540 100%); }
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.icon-hover {
+    transition: all 0.3s ease;
+}
+
+.icon-hover:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Other Transitions */
+.progress-bar {
+    transition: width 2s ease-in-out;
+}
+
+
+/* ==========================================================================
+   3. Component Styles
+   ========================================================================== */
+
+/* Interactive Timeline */
+.timeline-item {
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #1D4ED8, #14B8A6);
+    transform: translateX(-50%);
+}
+
+.timeline-item:first-child::before {
+    top: 50%;
+}
+
+.timeline-item:last-child::before {
+    bottom: 50%;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+
+/* ==========================================================================
+   4. Utility Classes
+   ========================================================================== */
+
+.gradient-text {
+    background: linear-gradient(135deg, #0A2540 0%, #1D4ED8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* ==========================================================================
+   5. Custom Scrollbar
+   ========================================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ==========================================================================
+   3. Component Styles
+   ========================================================================== */
+
+/* ... (keep your other styles like .timeline-item) ... */
+
+/* Mobile Dropdown Menu Animation */
+.mobile-menu {
+    /* Start hidden, slightly scaled down, and moved up */
+    opacity: 0;
+    transform: scale(0.98) translateY(-10px);
+    transform-origin: top;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.mobile-menu.active {
+    /* Become visible and animate to full size */
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+
+ /* Add this to your main style.css for the active tab styles */
+    .active-tab {
+        background-color: #2563eb;
+        /* royal-600 */
+        color: white;
+    }
+
+    .img-comparison-slider {
+        --divider-width: 4px;
+        --divider-color: #ffffff;
+        --default-handle-opacity: 0.8;
+    }
+
+
+       .team-card-container {
+        perspective: 1000px;
+        aspect-ratio: 4 / 5;
+    }
+
+    .team-card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 0.7s;
+        transform-style: preserve-3d;
+        border-radius: 1rem;
+        /* rounded-2xl */
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    .team-card-container:hover .team-card {
+        transform: rotateY(180deg);
+    }
+
+    .team-card-front,
+    .team-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 1rem;
+        /* rounded-2xl */
+        overflow: hidden;
+    }
+
+    .team-card-back {
+        background-color: white;
+        transform: rotateY(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+      .gallery-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        /* rounded-lg */
+    }
+
+    .gallery-card img {
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .gallery-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+        padding: 2rem 1rem 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 5rem;
+        /* 80px */
+        z-index: 2;
+    }
+
+    .marquee-container::before {
+        left: 0;
+        background: linear-gradient(to right, white, transparent);
+    }
+
+    .marquee-container::after {
+        right: 0;
+        background: linear-gradient(to left, white, transparent);
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marquee 40s linear infinite;
+    }
+
+    .logo-item {
+        flex-shrink: 0;
+        margin: 0 2rem;
+        /* 32px */
+    }
+
+    .logo-item img {
+        height: 4rem;
+        /* 64px */
+        width: auto;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    .logo-item:hover img {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+
+    .pause-animation {
+        animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0%);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* ==========================================================================
+   NEW SLIDER STYLES (Add this to your style.css)
+   ========================================================================== */
+
+.slide {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* ==========================================================================
+   Page-Specific Backgrounds
+   ========================================================================== */
+/* Add this to your Page-Specific Backgrounds section */
+.hero-bg-about {
+    background-image: url('img/about.jpg');
+}
+.hero-bg-edu {
+    background-image: url('img/sl3.jpg');
+}
+
+/* Add this to your Page-Specific Backgrounds section */
+.hero-bg-tech {
+    background-image: url('img/sl1.jpg');
+}
+
+
+/* Add this to your Page-Specific Backgrounds section */
+.hero-bg-recruitment {
+    background-image: url('img/sl2.jpg');
+}
+
+/* Add this to your Page-Specific Backgrounds section */
+.hero-bg-blog {
+    background-image: url('img/sl1.jpg');
+}
+/* You can add more for other pages here, e.g., .hero-bg-tech */
