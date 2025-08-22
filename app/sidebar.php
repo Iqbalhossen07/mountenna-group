@@ -50,14 +50,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </a>
         </li>
 
-        <!-- <li>
-            <a href="service.php"
+        <li>
+            <a href="career.php"
                class="flex items-center space-x-3 px-4 py-2 rounded-lg text-sidebar-text hover:bg-primary/20 hover:text-white transition-colors duration-200
-               <?php echo ($current_page == 'service.php') ? 'bg-sidebar-item-active text-white shadow-custom-sm hover:shadow-custom-md' : ''; ?>">
+               <?php echo ($current_page == 'career.php') ? 'bg-sidebar-item-active text-white shadow-custom-sm hover:shadow-custom-md' : ''; ?>">
                 <i class="fas fa-code text-lg fa-fw"></i>
-                <span class="font-medium">Service</span>
+                <span class="font-medium">Career</span>
             </a>
-        </li> -->
+        </li>
 
         <li>
             <a href="gallery.php"
