@@ -137,7 +137,16 @@ if (!isset($_SESSION['email'])) {
             <?php endif; ?>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-                <!-- @foreach ($members as $member) -->
+                <?php
+
+
+                $team = $mysqli->query("SELECT * FROM teams");
+
+
+                // Fetch and display the titles
+                while ($row = $team->fetch_assoc()):
+
+                ?>
 
                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-course-orange/20 hover:-translate-y-2 relative group w-full max-w-sm"
                     data-aos="fade-up" data-aos-delay="100">
@@ -149,35 +158,27 @@ if (!isset($_SESSION['email'])) {
                     </div>
 
                     <div class="relative z-20 flex flex-col items-center p-6 pt-8">
-                        <img src="{{asset('members/'.$member->t_image)}}" alt="Dr. Sarah Johnson"
+                        <img src="team_image/<?php echo ($row['t_image']) ?>" alt="Dr. Sarah Johnson"
                             class="w-52 h-52 rounded-2xl object-cover mb-5 shadow-md grayscale group-hover:grayscale-0 transition-all duration-300" />
                         <h3
                             class="text-xl font-bold text-course-primary mb-1 group-hover:text-white transition-colors duration-300">
-                            {{$member->t_name}}
+                            <?php echo ($row['t_name']) ?>
                         </h3>
                         <p class="text-sm text-gray-500 group-hover:text-white transition-colors duration-300 mb-4">
-                            {{$member->t_designation}}
+                            <?php echo ($row['t_designation']) ?>
                         </p>
                     </div>
 
                     <div
                         class="absolute top-4 right-4 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                        <a href="{{$member->t_facebook}}" target="_blank"
+                       
+                       
+                        <a href="<?php echo ($row['t_github']) ?>" target="_blank"
                             class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-colors"
                             title="Facebook">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-github"></i>
                         </a>
-                        <a href="{{$member->t_twitter}}" target="_blank"
-                            class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-colors"
-                            title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="{{$member->t_insta}}" target="_blank"
-                            class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-colors"
-                            title="Facebook">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="{{$member->t_linkedin}}" target="_blank"
+                        <a href="<?php echo ($row['t_linkedln']) ?>" target="_blank"
                             class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-colors"
                             title="Twitter">
                             <i class="fab fa-linkedin-in"></i>
@@ -186,19 +187,19 @@ if (!isset($_SESSION['email'])) {
 
                     <div
                         class="flex justify-center space-x-2 py-4 mb-2 relative z-30  opacity-100 transition-opacity duration-300">
-                        <a href="{{route('admin.member_view',$member->id)}}" class="action-button bg-metric-blue-light hover:bg-blue-600" title="View Profile">
+                        <a href="team_des.php?team_update_id=<?php echo $row['id']; ?>" class="action-button bg-metric-blue-light hover:bg-blue-600" title="View Profile">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="{{route('admin.edit_member',$member->id)}}" class="action-button bg-course-primary hover:bg-course-orange-light"
+                        <a href="update_team.php?team_update_id=<?php echo $row['id']; ?>" class="action-button bg-course-primary hover:bg-course-orange-light"
                             title="Edit Profile">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="{{route('admin.member_delete',$member->id)}}" onclick="alert('Are you sure?{{$member->t_name}} has been deleted?')" class="action-button bg-metric-red-dark hover:bg-red-700" title="Delete Member">
+                        <a href="logics.php?team_delete_id=<?php echo $row['id']; ?>" onclick="alert('Are you sure? <?php echo ($row['t_name']) ?> has been deleted?')" class="action-button bg-metric-red-dark hover:bg-red-700" title="Delete Member">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                 </div>
-                <!-- @endforeach -->
+             <?php endwhile; ?>
 
 
 

@@ -282,13 +282,15 @@ if (isset($_POST['add_team'])) {
 }
 
 
-// Update Testimonial  Logic
+// Update team  Logic
 
-if (isset($_POST['update_testimonial'])) {
-  $testimonial_update_id = $_POST['id'];
+if (isset($_POST['update_team'])) {
+  $team_update_id = $_POST['id'];
   $t_name = $_POST['t_name'];
-  $t_desgination  = $_POST['t_desgination'];
+  $t_designation = $_POST['t_designation'];
   $t_des = mysqli_real_escape_string($mysqli, $_POST['t_des']);
+  $t_linkedln = mysqli_real_escape_string($mysqli, $_POST['t_linkedln']);
+  $t_github = mysqli_real_escape_string($mysqli, $_POST['t_github']);
 
 
   $t_image = $_FILES['t_image']['name'];
@@ -300,26 +302,60 @@ if (isset($_POST['update_testimonial'])) {
     $t_image = $old_image;
   }
   $tmpName = $_FILES['t_image']['tmp_name'];
-  $folder = 'testimonial_image/' . $t_image;
+  $folder = 'team_image/' . $t_image;
 
 
-  $mysqli->query("UPDATE `testimonials` SET `t_name` = '$t_name', `t_desgination` = '$t_desgination', `t_des` = '$t_des', `t_image` = '$t_image' WHERE id=$testimonial_update_id");
+  $mysqli->query("UPDATE `teams` SET `t_name` = '$t_name', `t_designation` = '$t_designation', `t_des` = '$t_des', `t_linkedln` = '$t_linkedln', `t_github` = '$t_github', `t_image` = '$t_image' WHERE id=$team_update_id");
 
   move_uploaded_file($tmpName, $folder);
-  $_SESSION['message'] = "Testimonial has been updated";
+  $_SESSION['message'] = "Team has been updated";
   $_SESSION['message_type'] = 'warning';
-  header('location:testimonial.php');
+  header('location:team.php');
 }
 
 
-// Delete testimonial  Logic
+// Delete team  Logic
 
-if (isset($_GET['testimonial_delete_id'])) {
-  $id = $_GET['testimonial_delete_id'];
+if (isset($_GET['team_delete_id'])) {
+  $id = $_GET['team_delete_id'];
 
-  $mysqli->query("DELETE FROM testimonials WHERE id=$id");
+  $mysqli->query("DELETE FROM teams WHERE id=$id");
 
-  $_SESSION['message'] = "Testimonial has been deleted";
+  $_SESSION['message'] = "Team has been deleted";
   $_SESSION['message_type'] = 'danger';
-  header("location:testimonial.php");
+  header("location:team.php");
+}
+
+
+
+
+// Add contact  Logic
+if (isset($_POST['contact_added'])) {
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+  $location = $_POST['location'];
+
+
+  // Insert query
+  $mysqli->query("INSERT INTO contact_table (email, phone, location ) VALUES ('$email', '$phone', '$location')");
+
+  // Flash message
+  $_SESSION['message'] = "Contact Informaiton has been added successfully!";
+  $_SESSION['message_type'] = 'success';
+
+  header("location:contact.php");
+  exit();
+}
+
+
+// Delete team  Logic
+
+if (isset($_GET['contact_delete_id'])) {
+  $id = $_GET['contact_delete_id'];
+
+  $mysqli->query("DELETE FROM contact_table WHERE id=$id");
+
+  $_SESSION['message'] = "Contact has been deleted";
+  $_SESSION['message_type'] = 'danger';
+  header("location:contact.php");
 }
