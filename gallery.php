@@ -1,3 +1,4 @@
+<?php include('app/db.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,35 +8,35 @@
     <title>Gallery | Mountenna Group Moments</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <?php include "tsconfig.php" ?>
     <link rel="stylesheet" href="style.css">
     <style>
-    /* Additional styles for gallery and lightbox */
-    .hero-bg-gallery {
-        background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1920&auto=format&fit=crop');
-    }
+        /* Additional styles for gallery and lightbox */
+        .hero-bg-gallery {
+            background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1920&auto=format&fit=crop');
+        }
 
-    .gallery-item {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        aspect-ratio: 1 / 1;
-        /* Creates a square aspect ratio */
-    }
+        .gallery-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 1 / 1;
+            /* Creates a square aspect ratio */
+        }
 
-    .gallery-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
 
-    .lightbox {
-        transition: opacity 0.3s ease-in-out;
-    }
+        .lightbox {
+            transition: opacity 0.3s ease-in-out;
+        }
 
-    .lightbox-content {
-        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
+        .lightbox-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
 
@@ -59,39 +60,21 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Image Grid -->
             <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- All images are now in a single grid for uniform layout -->
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/1e40af/FFFFFF?text=Graduation+Day" alt="Graduation Day"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/243b53/FFFFFF?text=University+Fair" alt="University Fair"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/0d9488/FFFFFF?text=Tech+Workshop" alt="Tech Workshop"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/ca8a04/FFFFFF?text=Hiring+Success" alt="Hiring Success"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/1e40af/FFFFFF?text=Campus+Tour" alt="Campus Tour"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/0d9488/FFFFFF?text=Product+Launch" alt="Product Launch"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/243b53/FFFFFF?text=Networking+Event" alt="Networking Event"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://placehold.co/600x600/ca8a04/FFFFFF?text=Team+Building" alt="Team Building"
-                        class="rounded-lg cursor-pointer w-full h-full object-cover">
-                </div>
+                <?php
+
+
+                $gallery = $mysqli->query("SELECT * FROM gallery_images");
+
+
+                // Fetch and display the titles
+                while ($row = $gallery->fetch_assoc()):
+
+                ?>
+                    <!-- All images are now in a single grid for uniform layout -->                    <div class="gallery-item">
+                        <img src="app/g_images/<?php echo ($row['g_image']) ?>" alt="Graduation Day"
+                            class="rounded-lg cursor-pointer w-full h-full object-cover">
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </main>
@@ -111,35 +94,35 @@
 
     <script src="main.js"></script>
     <script>
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
 
-    // Lightbox functionality
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const imgSrc = item.querySelector('img').src;
-            lightboxImg.src = imgSrc;
-            lightbox.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                lightboxImg.classList.remove('opacity-0', 'scale-95');
-            }, 50); // Small delay for transition
+        // Lightbox functionality
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.remove('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    lightboxImg.classList.remove('opacity-0', 'scale-95');
+                }, 50); // Small delay for transition
+            });
         });
-    });
 
-    function closeLightbox() {
-        lightboxImg.classList.add('opacity-0', 'scale-95');
-        setTimeout(() => {
-            lightbox.classList.add('opacity-0', 'pointer-events-none');
-        }, 300); // Match transition duration
-    }
-
-    // Close lightbox on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeLightbox();
+        function closeLightbox() {
+            lightboxImg.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('opacity-0', 'pointer-events-none');
+            }, 300); // Match transition duration
         }
-    });
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     </script>
 </body>
 

@@ -89,6 +89,8 @@
                     </div>
                 </div>
 
+                <a href="career.php"
+                    class="text-gray-700 hover:text-navy-900 font-medium transition-colors duration-200">Career</a>
                 <a href="gallery.php"
                     class="text-gray-700 hover:text-navy-900 font-medium transition-colors duration-200">Gallery</a>
                 <a href="blog.php"
@@ -135,6 +137,8 @@
                         class="block text-gray-700 hover:text-navy-900 font-medium py-2">Mountenna Recruitment</a>
                 </div>
             </div>
+              <a href="career.php"
+                class="block text-gray-700 hover:text-navy-900 font-medium py-2 px-3 rounded-md">Career</a>
 
             <a href="gallery.php"
                 class="block text-gray-700 hover:text-navy-900 font-medium py-2 px-3 rounded-md">Gallery</a>

@@ -1,3 +1,4 @@
+<?php include('app/db.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +11,10 @@
         rel="stylesheet">
 
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <?php include "tsconfig.php" ?>
 
     <link rel="stylesheet" href="style.css">
@@ -22,7 +23,7 @@
 <body class="min-h-screen bg-white">
     <?php include "nav.php" ?>
 
-    <div class="relative h-[50vh] min-h-[400px] bg-cover bg-center" style="background-image: url('img/career-hero.jpg');">
+    <div class="relative h-[50vh] min-h-[400px] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1621036579842-9080c7119f67?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
         <div class="absolute inset-0 bg-navy-900/50"></div>
         <div class="relative z-10 h-full flex items-center justify-center">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -33,10 +34,7 @@
                     <p class="text-xl lg:text-2xl text-gray-200 font-sans">
                         Join a team of innovators, thinkers, and builders dedicated to shaping the future.
                     </p>
-                    <button onclick="scrollToSection('open-positions')"
-                        class="bg-white text-navy-900 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-xl rounded-lg transition-all duration-300">
-                        View Open Roles <i class="fas fa-arrow-down ml-2"></i>
-                    </button>
+
                 </div>
             </div>
         </div>
@@ -105,127 +103,49 @@
 
             <div class="max-w-4xl mx-auto">
                 <div class="space-y-6">
-                    
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <div class="flex flex-col sm:flex-row justify-between sm:items-center">
-                            <div>
-                                <h3 class="text-xl font-bold font-heading text-navy-900 hover:text-royal-700">
-                                    <a href="#">Senior Software Engineer</a>
-                                </h3>
-                                <div class="flex items-center space-x-4 text-sm text-gray-500 mt-2">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-briefcase text-teal-600"></i>
-                                        <span>Mountenna Tech</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-map-marker-alt text-teal-600"></i>
-                                        <span>London, UK (Hybrid)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-4 sm:mt-0">
-                                <a href="#" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
-                                    Apply Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
 
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <div class="flex flex-col sm:flex-row justify-between sm:items-center">
-                            <div>
-                                <h3 class="text-xl font-bold font-heading text-navy-900 hover:text-royal-700">
-                                    <a href="#">Education Consultant</a>
-                                </h3>
-                                <div class="flex items-center space-x-4 text-sm text-gray-500 mt-2">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-briefcase text-navy-600"></i>
-                                        <span>Mountenna Edu</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-map-marker-alt text-navy-600"></i>
-                                        <span>Manchester, UK</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-4 sm:mt-0">
-                                <a href="#" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
-                                    Apply Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <div class="flex flex-col sm:flex-row justify-between sm:items-center">
-                            <div>
-                                <h3 class="text-xl font-bold font-heading text-navy-900 hover:text-royal-700">
-                                    <a href="#">Healthcare Recruitment Specialist</a>
-                                </h3>
-                                <div class="flex items-center space-x-4 text-sm text-gray-500 mt-2">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-briefcase text-gold-700"></i>
-                                        <span>Mountenna Recruitment</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-map-marker-alt text-gold-700"></i>
-                                        <span>Remote</span>
+                    $team = $mysqli->query("SELECT * FROM career");
+
+
+                    // Fetch and display the titles
+                    while ($row = $team->fetch_assoc()):
+
+                    ?>
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center">
+                                <div>
+                                    <h3 class="text-xl font-bold font-heading text-navy-900 hover:text-royal-700">
+                                        <a href="#">   <?php echo $row['j_title']; ?></a>
+                                    </h3>
+                                    <div class="flex items-center space-x-4 text-sm text-gray-500 mt-2">
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-briefcase text-teal-600"></i>
+                                            <span><?php echo $row['j_company']; ?></span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-map-marker-alt text-teal-600"></i>
+                                            <span><?php echo $row['j_type']; ?></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mt-4 sm:mt-0">
-                                <a href="#" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
-                                    Apply Now
-                                </a>
+                                <div class="mt-4 sm:mt-0">
+                                    <a href="booking.php?booking_id=<?php echo $row['id']; ?>" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
+                                        Apply Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                    <?php endwhile; ?>
 
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="employee-voices" class="py-24 bg-gray-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-4xl mx-auto mb-16">
-                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 font-heading gradient-text">
-                    Voices From Our Team
-                </h2>
-                <p class="text-xl text-gray-600 leading-relaxed font-sans">
-                   Hear directly from the people who make Mountenna Group a great place to work.
-                </p>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <blockquote class="text-lg font-sans italic text-gray-700 leading-relaxed mb-6">
-                        "The culture of collaboration here is amazing. I've grown more in two years at Mountenna than anywhere else, thanks to the supportive leadership and challenging projects."
-                    </blockquote>
-                    <div class="flex items-center">
-                        <img src="https://placehold.co/80x80/3b82f6/FFFFFF?text=J.D." alt="Portrait of John Doe" class="w-16 h-16 rounded-full mr-4 shadow-md">
-                        <div>
-                            <p class="font-heading font-bold text-lg text-navy-900">John Doe</p>
-                            <p class="font-sans text-sm text-gray-500">Lead Developer, Mountenna Tech</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <blockquote class="text-lg font-sans italic text-gray-700 leading-relaxed mb-6">
-                        "What I love most is the impact we have. Seeing students succeed and knowing I played a part in their journey is incredibly rewarding. It’s a very mission-driven company."
-                    </blockquote>
-                    <div class="flex items-center">
-                        <img src="https://placehold.co/80x80/14b8a6/FFFFFF?text=M.S." alt="Portrait of Maria Sanchez" class="w-16 h-16 rounded-full mr-4 shadow-md">
-                        <div>
-                            <p class="font-heading font-bold text-lg text-navy-900">Maria Sanchez</p>
-                            <p class="font-sans text-sm text-gray-500">Senior Education Advisor, Mountenna Edu</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     <section class="py-24 bg-white">

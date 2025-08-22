@@ -159,7 +159,7 @@ if (!isset($_SESSION['email'])) {
                        <?php echo ($row['b_title']) ?>
                         </h3>
                         <p class="text-sm text-text-light mb-3">
-                            By <span class="font-semibold"><?php echo ($row['b_author']) ?></span> |  <?php echo ($row['b_author']) ?>
+                            By <span class="font-semibold"><?php echo ($row['b_author']) ?></span> |  <?php echo ($row['b_date']) ?>
                         </p>
                         <p class="text-text-dark text-sm mb-4 line-clamp-3">
                                                     <?php 

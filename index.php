@@ -1,3 +1,4 @@
+<?php include('app/db.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
 
     <!-- New Font Imports -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/img-comparison-slider@8/dist/index.js"></script>
@@ -636,86 +637,40 @@
             <div class="relative max-w-4xl mx-auto">
                 <div id="testimonial-slider" class="overflow-hidden">
                     <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+                        <?php
 
-                        <!-- Testimonial 1: Student -->
-                        <div class="testimonial-slide flex-shrink-0 w-full p-4">
-                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-12 text-center">
-                                <img src="https://placehold.co/100x100/3b82f6/FFFFFF?text=A.K."
-                                    alt="Portrait of Aisha Khan" class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg">
-                                <div class="flex justify-center text-yellow-400 mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <blockquote
-                                    class="text-lg font-sans italic text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                                    "Mountenna Edu turned my dream of studying in the UK into a reality. Their guidance
-                                    was invaluable, and I felt supported at every single step of the application
-                                    process."
-                                </blockquote>
-                                <div class="mt-6">
-                                    <p class="font-heading font-bold text-lg text-navy-900">Aisha Khan</p>
-                                    <p class="font-sans text-sm text-gray-500">MSc Data Science Student</p>
+
+                        $testimonial = $mysqli->query("SELECT * FROM testimonials");
+
+
+                        // Fetch and display the titles
+                        while ($row = $testimonial->fetch_assoc()):
+
+                        ?>
+                            <!-- Testimonial 1: Student -->
+                            <div class="testimonial-slide flex-shrink-0 w-full p-4">
+                                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-12 text-center">
+                                    <img src="app/testimonial_image/<?php echo ($row['t_image']) ?>"
+                                        alt="Portrait of Aisha Khan" class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg">
+                                    <div class="flex justify-center text-yellow-400 mb-4">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <blockquote
+                                        class="text-lg font-sans italic text-gray-700 leading-relaxed max-w-2xl mx-auto">
+                                        <?php echo ($row['t_des']) ?>
+                                    </blockquote>
+                                    <div class="mt-6">
+                                        <p class="font-heading font-bold text-lg text-navy-900"><?php echo ($row['t_name']) ?></p>
+                                        <p class="font-sans text-sm text-gray-500"><?php echo ($row['t_desgination']) ?></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Testimonial 2: Video Testimonial -->
-                        <div class="testimonial-slide flex-shrink-0 w-full p-4">
-                            <div
-                                class="bg-navy-800 border border-navy-700 rounded-2xl p-8 md:p-12 text-center text-white">
-                                <div class="relative w-24 h-24 mx-auto mb-6">
-                                    <img src="https://placehold.co/100x100/14b8a6/FFFFFF?text=D.L."
-                                        alt="Portrait of David Lee" class="w-24 h-24 rounded-full shadow-lg">
-                                    <button
-                                        class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full group">
-                                        <i
-                                            class="fas fa-play text-2xl text-white group-hover:scale-110 transition-transform"></i>
-                                    </button>
-                                </div>
-                                <div class="flex justify-center text-yellow-400 mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <blockquote class="text-lg font-sans italic leading-relaxed max-w-2xl mx-auto">
-                                    "The custom software solution from Mountenna Tech revolutionized our workflow. Their
-                                    team understood our needs perfectly and delivered beyond our expectations."
-                                </blockquote>
-                                <div class="mt-6">
-                                    <p class="font-heading font-bold text-lg">David Lee</p>
-                                    <p class="font-sans text-sm text-gray-400">CEO, Innovate Solutions</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 3: Recruitment -->
-                        <div class="testimonial-slide flex-shrink-0 w-full p-4">
-                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-12 text-center">
-                                <img src="https://placehold.co/100x100/ca8a04/FFFFFF?text=S.P."
-                                    alt="Portrait of Sarah Patel" class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg">
-                                <div class="flex justify-center text-yellow-400 mb-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <blockquote
-                                    class="text-lg font-sans italic text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                                    "Finding the right executive was critical for us. Mountenna Recruitment's
-                                    professional and efficient process brought us the perfect candidate in record time."
-                                </blockquote>
-                                <div class="mt-6">
-                                    <p class="font-heading font-bold text-lg text-navy-900">Sarah Patel</p>
-                                    <p class="font-sans text-sm text-gray-500">HR Director, FinCorp</p>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endwhile; ?>
 
                     </div>
                 </div>
@@ -732,11 +687,6 @@
             </div>
         </div>
     </section>
-
-
-
-
-
 
 
 
@@ -764,120 +714,55 @@
 
             <!-- Blog Posts Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php
 
-                <!-- Blog Post 1: Education -->
-                <div
-                    class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
-                    <div class="overflow-hidden">
-                        <a href="#">
-                            <img src="https://placehold.co/600x400/2563eb/FFFFFF?text=Education"
-                                alt="A student studying in a modern library"
-                                class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
-                        </a>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div>
-                            <span
-                                class="inline-block bg-royal-100 text-royal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4">Education</span>
-                            <a href="#" class="block">
-                                <h3
-                                    class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-royal-600 transition-colors">
-                                    Navigating UK University Admissions: A 2025 Guide</h3>
-                            </a>
-                            <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
-                                Discover the key changes and top tips for international students applying to UK
-                                universities this year.
-                            </p>
-                        </div>
-                        <div class="flex-grow"></div>
-                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                            <div class="flex items-center">
-                                <img src="https://placehold.co/40x40/f0f4f8/334e68?text=EJ" alt="Author Emily Jones"
-                                    class="w-8 h-8 rounded-full mr-3">
-                                <span class="font-sans text-xs text-gray-500">By Emily Jones</span>
-                            </div>
-                            <a href="#" class="font-sans text-sm font-semibold text-royal-600 hover:text-navy-900">
-                                Read More <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Blog Post 2: Technology -->
-                <div
-                    class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
-                    <div class="overflow-hidden">
-                        <a href="#">
-                            <img src="https://placehold.co/600x400/14b8a6/FFFFFF?text=Technology"
-                                alt="Abstract technology background with code"
-                                class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
-                        </a>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div>
-                            <span
-                                class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4">Technology</span>
-                            <a href="#" class="block">
-                                <h3
-                                    class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-teal-600 transition-colors">
-                                    The Rise of AI in Business: Are You Ready?</h3>
-                            </a>
-                            <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
-                                How artificial intelligence is reshaping industries and what your business can do to
-                                stay ahead of the curve.
-                            </p>
-                        </div>
-                        <div class="flex-grow"></div>
-                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                            <div class="flex items-center">
-                                <img src="https://placehold.co/40x40/f0f4f8/334e68?text=JS" alt="Author John Smith"
-                                    class="w-8 h-8 rounded-full mr-3">
-                                <span class="font-sans text-xs text-gray-500">By John Smith</span>
-                            </div>
-                            <a href="#" class="font-sans text-sm font-semibold text-teal-600 hover:text-navy-900">
-                                Read More <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                $blog = $mysqli->query("SELECT * FROM blogs ORDER BY id DESC LIMIT 3");
 
-                <!-- Blog Post 3: Careers -->
-                <div
-                    class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
-                    <div class="overflow-hidden">
-                        <a href="#">
-                            <img src="https://placehold.co/600x400/ca8a04/FFFFFF?text=Careers"
-                                alt="A professional in a modern office environment"
-                                class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
-                        </a>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div>
-                            <span
-                                class="inline-block bg-gold-100 text-gold-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4">Careers</span>
-                            <a href="#" class="block">
-                                <h3
-                                    class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">
-                                    Crafting the Perfect CV for the Tech Industry</h3>
+
+
+                // Fetch and display the titles
+                while ($row = $blog->fetch_assoc()):
+
+                ?>
+                    <!-- Blog Post 1: Education -->
+                    <div
+                        class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
+                        <div class="overflow-hidden">
+                            <a href="#">
+                                <img src="app/blogImage/<?php echo ($row['b_image']) ?>"
+                                    alt="A student studying in a modern library"
+                                    class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
                             </a>
-                            <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
-                                Our recruitment experts share their top secrets for creating a standout CV that gets you
-                                noticed by top tech firms.
-                            </p>
                         </div>
-                        <div class="flex-grow"></div>
-                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                            <div class="flex items-center">
-                                <img src="https://placehold.co/40x40/f0f4f8/334e68?text=MB" alt="Author Michael Brown"
-                                    class="w-8 h-8 rounded-full mr-3">
-                                <span class="font-sans text-xs text-gray-500">By Michael Brown</span>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div>
+                                <span
+                                    class="inline-block bg-royal-100 text-royal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4"><?php echo ($row['b_category']) ?></span>
+                                <a href="#" class="block">
+                                    <h3
+                                        class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-royal-600 transition-colors">
+                                       <?php echo ($row['b_title']) ?></h3>
+                                </a>
+                                <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
+                                  <?php echo ($row['b_des']) ?>
+                                </p>
                             </div>
-                            <a href="#" class="font-sans text-sm font-semibold text-gold-600 hover:text-navy-900">
-                                Read More <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
+                            <div class="flex-grow"></div>
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/f0f4f8/334e68?text=EJ" alt="Author Emily Jones"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-sans text-xs text-gray-500"><?php echo ($row['b_author']) ?></span>
+                                </div>
+                                <a href="blog-details.php?blog_id=<?php echo ($row['id']) ?>" class="font-sans text-sm font-semibold text-royal-600 hover:text-navy-900">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                <?php endwhile; ?>
 
             </div>
         </div>

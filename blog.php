@@ -1,3 +1,4 @@
+<?php include('app/db.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,131 +33,65 @@
 
     <!-- Main Blog Content -->
     <main class="py-24">
+          <!-- Blog Section -->
+    <section id="blog" class=" bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-3 gap-12">
+          
 
-                <!-- Main Content: Posts -->
-                <div class="lg:col-span-2">
-                    <!-- Featured Post -->
-                    <div class="group mb-12">
-                        <a href="#" class="block overflow-hidden rounded-2xl shadow-lg mb-6">
-                            <img src="https://placehold.co/800x500/2563eb/FFFFFF?text=Featured+Article"
-                                alt="Featured blog post image"
-                                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                        </a>
-                        <div>
-                            <span
-                                class="inline-block bg-royal-100 text-royal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4">Education</span>
+            <!-- Blog Posts Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php
+
+
+                $blog = $mysqli->query("SELECT * FROM blogs");
+
+
+                // Fetch and display the titles
+                while ($row = $blog->fetch_assoc()):
+
+                ?>
+                    <!-- Blog Post 1: Education -->
+                    <div
+                        class="group bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
+                        <div class="overflow-hidden">
                             <a href="#">
-                                <h2
-                                    class="text-3xl font-bold font-heading text-navy-900 mb-4 group-hover:text-royal-600 transition-colors">
-                                    Navigating UK University Admissions: A Complete 2025 Guide</h2>
+                                <img src="app/blogImage/<?php echo ($row['b_image']) ?>"
+                                    alt="A student studying in a modern library"
+                                    class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
                             </a>
-                            <p class="font-sans text-gray-600 leading-relaxed mb-6">The landscape of UK higher education
-                                is constantly evolving. In this comprehensive guide, our expert counselors break down
-                                the key changes for the 2025 intake, offering invaluable tips for international students
-                                on everything from personal statements to visa applications.</p>
-                            <div class="flex items-center text-sm">
-                                <img src="https://placehold.co/40x40/f0f4f8/334e68?text=EJ" alt="Author Emily Jones"
-                                    class="w-10 h-10 rounded-full mr-4">
-                                <div>
-                                    <p class="font-sans font-semibold text-navy-900">By Emily Jones</p>
-                                    <p class="font-sans text-gray-500">August 20, 2025 &bull; 7 min read</p>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div>
+                                <span
+                                    class="inline-block bg-royal-100 text-royal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-4"><?php echo ($row['b_category']) ?></span>
+                                <a href="#" class="block">
+                                    <h3
+                                        class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-royal-600 transition-colors">
+                                       <?php echo ($row['b_title']) ?></h3>
+                                </a>
+                                <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
+                                  <?php echo ($row['b_des']) ?>
+                                </p>
+                            </div>
+                            <div class="flex-grow"></div>
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/f0f4f8/334e68?text=EJ" alt="Author Emily Jones"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-sans text-xs text-gray-500"><?php echo ($row['b_author']) ?></span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-12 border-gray-200">
-
-                    <!-- Latest Posts Grid -->
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <!-- Post 1 -->
-                        <div class="group flex flex-col">
-                            <a href="#" class="block overflow-hidden rounded-2xl shadow-md mb-4"><img
-                                    src="https://placehold.co/600x400/14b8a6/FFFFFF?text=Technology"
-                                    alt="Tech post image"
-                                    class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"></a>
-                            <div>
-                                <span
-                                    class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-3">Technology</span>
-                                <a href="#">
-                                    <h3
-                                        class="font-heading text-xl font-bold text-navy-900 mb-2 group-hover:text-teal-600 transition-colors">
-                                        The Rise of AI in Business</h3>
+                                <a href="blog-details.php?blog_id=<?php echo ($row['id']) ?>" class="font-sans text-sm font-semibold text-royal-600 hover:text-navy-900">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
                                 </a>
-                                <p class="font-sans text-sm text-gray-600">How artificial intelligence is reshaping
-                                    industries and what you can do to stay ahead.</p>
-                            </div>
-                        </div>
-                        <!-- Post 2 -->
-                        <div class="group flex flex-col">
-                            <a href="#" class="block overflow-hidden rounded-2xl shadow-md mb-4"><img
-                                    src="https://placehold.co/600x400/ca8a04/FFFFFF?text=Careers"
-                                    alt="Careers post image"
-                                    class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"></a>
-                            <div>
-                                <span
-                                    class="inline-block bg-gold-100 text-gold-800 text-xs font-semibold font-sans px-3 py-1 rounded-full mb-3">Careers</span>
-                                <a href="#">
-                                    <h3
-                                        class="font-heading text-xl font-bold text-navy-900 mb-2 group-hover:text-gold-600 transition-colors">
-                                        Crafting the Perfect CV</h3>
-                                </a>
-                                <p class="font-sans text-sm text-gray-600">Our recruitment experts share secrets for
-                                    creating a CV that gets you noticed.</p>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <!-- Sidebar -->
-                <aside class="lg:col-span-1">
-                    <div class="sticky top-24 space-y-12">
-                        <!-- Categories -->
-                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                            <h4 class="font-heading font-bold text-xl text-navy-900 mb-4">Categories</h4>
-                            <ul class="space-y-3 font-sans">
-                                <li><a href="#"
-                                        class="flex justify-between items-center text-gray-700 hover:text-royal-600"><span>Education</span>
-                                        <span
-                                            class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">12</span></a>
-                                </li>
-                                <li><a href="#"
-                                        class="flex justify-between items-center text-gray-700 hover:text-royal-600"><span>Technology</span>
-                                        <span
-                                            class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">8</span></a>
-                                </li>
-                                <li><a href="#"
-                                        class="flex justify-between items-center text-gray-700 hover:text-royal-600"><span>Careers</span>
-                                        <span
-                                            class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">15</span></a>
-                                </li>
-                                <li><a href="#"
-                                        class="flex justify-between items-center text-gray-700 hover:text-royal-600"><span>Company
-                                            News</span> <span
-                                            class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">5</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Newsletter Signup -->
-                        <div class="bg-navy-800 p-8 rounded-2xl text-white text-center">
-                            <h4 class="font-heading font-bold text-2xl mb-3">Stay Informed</h4>
-                            <p class="font-sans text-sm text-navy-300 mb-6">Subscribe to our newsletter to get the
-                                latest insights delivered to your inbox.</p>
-                            <form action="#" class="space-y-4">
-                                <input type="email" placeholder="Your email address"
-                                    class="w-full bg-navy-700 border border-navy-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-500 placeholder-navy-400">
-                                <button type="submit"
-                                    class="w-full bg-royal-600 hover:bg-royal-700 text-white py-2 rounded-lg font-semibold transition-colors">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </aside>
+                <?php endwhile; ?>
 
             </div>
         </div>
+    </section>
     </main>
 
     <?php include "footer.php" ?>

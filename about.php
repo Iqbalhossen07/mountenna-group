@@ -1,3 +1,4 @@
+<?php include('app/db.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
 
     <!-- Font Imports -->
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -195,137 +196,51 @@
 
             <!-- Team Bio Cards Grid -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <?php
 
-                <!-- Team Member 1 -->
-                <div class="team-card-container">
-                    <div class="team-card">
-                        <!-- Front of Card -->
-                        <div class="team-card-front">
-                            <img src="https://placehold.co/400x500/dbeafe/1e40af?text=Jane+Doe"
-                                alt="Portrait of Jane Doe" class="w-full h-full object-cover">
-                            <div
-                                class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
-                                <h4 class="text-xl font-bold font-heading text-white">Jane Doe</h4>
-                                <p class="font-sans text-sm text-gray-200">Chief Executive Officer</p>
+
+                $team = $mysqli->query("SELECT * FROM teams");
+
+
+                // Fetch and display the titles
+                while ($row = $team->fetch_assoc()):
+
+                ?>
+                    <!-- Team Member 1 -->
+                    <div class="team-card-container">
+                        <div class="team-card">
+                            <!-- Front of Card -->
+                            <div class="team-card-front">
+                                <img src="app/team_image/<?php echo ($row['t_image']) ?>"
+                                    alt="Portrait of Jane Doe" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
+                                    <h4 class="text-xl font-bold font-heading text-white"> <?php echo ($row['t_name']) ?></h4>
+                                    <p class="font-sans text-sm text-gray-200">     <?php echo ($row['t_designation']) ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Back of Card -->
-                        <div class="team-card-back">
-                            <div class="p-6 text-center">
-                                <h4 class="text-xl font-bold font-heading text-navy-900">Jane Doe</h4>
-                                <p class="font-sans text-sm text-royal-600 mb-4">Chief Executive Officer</p>
-                                <p class="font-sans text-sm text-gray-600 mb-6">
-                                    Jane orchestrates our strategic vision, ensuring every division works in harmony
-                                    towards our collective goals.
-                                </p>
-                                <div class="flex justify-center space-x-3">
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-twitter"></i></a>
+                            <!-- Back of Card -->
+                            <div class="team-card-back">
+                                <div class="p-6 text-center">
+                                    <h4 class="text-xl font-bold font-heading text-navy-900"> <?php echo ($row['t_name']) ?></h4>
+                                    <p class="font-sans text-sm text-royal-600 mb-4">     <?php echo ($row['t_designation']) ?></p>
+                                    <p class="font-sans text-sm text-gray-600 mb-6">
+                                             <?php echo ($row['t_des']) ?>
+                                    </p>
+                                    <div class="flex justify-center space-x-3">
+                                        <a href="<?php echo ($row['t_linkedln']) ?>" target="_blank"
+                                            class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
+                                                class="fab fa-linkedin-in"></i></a>
+                                        <a href="<?php echo ($row['t_github']) ?>" target="_blank"
+                                            class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
+                                                class="fab fa-twitter"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Team Member 2 -->
-                <div class="team-card-container">
-                    <div class="team-card">
-                        <div class="team-card-front">
-                            <img src="https://placehold.co/400x500/dbeafe/1e40af?text=John+Smith"
-                                alt="Portrait of John Smith" class="w-full h-full object-cover">
-                            <div
-                                class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
-                                <h4 class="text-xl font-bold font-heading text-white">John Smith</h4>
-                                <p class="font-sans text-sm text-gray-200">Head of Technology</p>
-                            </div>
-                        </div>
-                        <div class="team-card-back">
-                            <div class="p-6 text-center">
-                                <h4 class="text-xl font-bold font-heading text-navy-900">John Smith</h4>
-                                <p class="font-sans text-sm text-royal-600 mb-4">Head of Technology</p>
-                                <p class="font-sans text-sm text-gray-600 mb-6">
-                                    John is the architect of our digital solutions, leading Mountenna Tech with a
-                                    passion for innovation.
-                                </p>
-                                <div class="flex justify-center space-x-3">
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Team Member 3 -->
-                <div class="team-card-container">
-                    <div class="team-card">
-                        <div class="team-card-front">
-                            <img src="https://placehold.co/400x500/dbeafe/1e40af?text=Emily+Jones"
-                                alt="Portrait of Emily Jones" class="w-full h-full object-cover">
-                            <div
-                                class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
-                                <h4 class="text-xl font-bold font-heading text-white">Emily Jones</h4>
-                                <p class="font-sans text-sm text-gray-200">Director of Education</p>
-                            </div>
-                        </div>
-                        <div class="team-card-back">
-                            <div class="p-6 text-center">
-                                <h4 class="text-xl font-bold font-heading text-navy-900">Emily Jones</h4>
-                                <p class="font-sans text-sm text-royal-600 mb-4">Director of Education</p>
-                                <p class="font-sans text-sm text-gray-600 mb-6">
-                                    Emily champions student success, overseeing all operations for Mountenna Edu with
-                                    dedication.
-                                </p>
-                                <div class="flex justify-center space-x-3">
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Team Member 4 -->
-                <div class="team-card-container">
-                    <div class="team-card">
-                        <div class="team-card-front">
-                            <img src="https://placehold.co/400x500/dbeafe/1e40af?text=Michael+Brown"
-                                alt="Portrait of Michael Brown" class="w-full h-full object-cover">
-                            <div
-                                class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
-                                <h4 class="text-xl font-bold font-heading text-white">Michael Brown</h4>
-                                <p class="font-sans text-sm text-gray-200">Lead Recruitment Partner</p>
-                            </div>
-                        </div>
-                        <div class="team-card-back">
-                            <div class="p-6 text-center">
-                                <h4 class="text-xl font-bold font-heading text-navy-900">Michael Brown</h4>
-                                <p class="font-sans text-sm text-royal-600 mb-4">Lead Recruitment Partner</p>
-                                <p class="font-sans text-sm text-gray-600 mb-6">
-                                    Michael connects top-tier talent with leading organizations, driving success for
-                                    Mountenna Recruitment.
-                                </p>
-                                <div class="flex justify-center space-x-3">
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                    <a href="#"
-                                        class="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-full hover:bg-royal-600 hover:text-white transition-colors"><i
-                                            class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; ?>
 
             </div>
         </div>
