@@ -1,3 +1,9 @@
+<?php include('db.php');
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,96 +92,96 @@
 
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
             <div class="flex justify-end mb-6">
-                <a href="{{ route('admin.add_service') }}"
+                <a href="add_job.php"
                     class="bg-course-primary text-white px-5 py-2 rounded-lg shadow-md hover:bg-course-orange-light transition-colors duration-200 flex items-center space-x-2">
                     <i class="fas fa-plus"></i>
-                    <span>Add New Service</span>
+                    <span>Add New Job</span>
                 </a>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center">
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800">
-                                Senior Software Engineer
-                            </h3>
-                            <div class="flex flex-wrap items-center space-x-4 text-sm text-gray-500 mt-2">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-briefcase text-teal-600"></i>
-                                    <span>Mountenna Tech</span>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-map-marker-alt text-teal-600"></i>
-                                    <span>London, UK (Hybrid)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4 sm:mt-0">
-                            <a href="#" class="bg-blue-100 text-blue-800 hover:bg-blue-200 px-6 py-2.5 rounded-lg font-semibold transition-colors duration-200 inline-block">
-                                Apply Now
-                            </a>
-                        </div>
+               <?php if (isset($_SESSION['message'])): ?>
+                <?php
+                $type = $_SESSION['message_type'];
+                $message = $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+
+                <div class="w-full flex justify-center mt-4">
+                    <div id="flash-message"
+                        class="flex items-center gap-3 px-6 py-4 text-sm font-medium rounded-lg shadow-md w-[400px] text-center
+                <?php if ($type == 'success') echo 'bg-green-100 text-green-800 border border-green-300'; ?>
+                <?php if ($type == 'warning') echo 'bg-yellow-100 text-yellow-800 border border-yellow-300'; ?>
+                <?php if ($type == 'danger')  echo 'bg-red-100 text-red-800 border border-red-300'; ?>">
+
+                        <?php if ($type == 'success'): ?>
+                            <i class="fas fa-check-circle text-green-600 text-lg"></i>
+                        <?php elseif ($type == 'warning'): ?>
+                            <i class="fas fa-exclamation-triangle text-yellow-600 text-lg"></i>
+                        <?php elseif ($type == 'danger'): ?>
+                            <i class="fas fa-times-circle text-red-600 text-lg"></i>
+                        <?php endif; ?>
+
+                        <span class="flex-1"><?= $message; ?></span>
                     </div>
                 </div>
+
+                <script>
+                    setTimeout(function() {
+                        var flashMessage = document.getElementById('flash-message');
+                        if (flashMessage) {
+                            flashMessage.style.display = 'none';
+                        }
+                    }, 3000);
+                </script>
+            <?php endif; ?>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+             
+               <?php
+
+
+                $team = $mysqli->query("SELECT * FROM career");
+
+
+                // Fetch and display the titles
+                while ($row = $team->fetch_assoc()):
+
+                ?>
 
                 <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center">
                         <div>
                             <h3 class="text-xl font-bold text-gray-800">
-                                Education Consultant
+                               <?php echo $row['j_title']; ?>
                             </h3>
                             <div class="flex flex-wrap items-center space-x-4 text-sm text-gray-500 mt-2">
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-briefcase text-blue-600"></i>
-                                    <span>Mountenna Edu</span>
+                                    <span><?php echo $row['j_company']; ?></span>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <i class="fas fa-map-marker-alt text-blue-600"></i>
-                                    <span>Manchester, UK</span>
+                                    <span><?php echo $row['j_type']; ?></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-4 sm:mt-0">
-                            <a href="#" class="bg-blue-100 text-blue-800 hover:bg-blue-200 px-6 py-2.5 rounded-lg font-semibold transition-colors duration-200 inline-block">
-                                Apply Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center">
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800">
-                                Healthcare Recruitment Specialist
-                            </h3>
-                            <div class="flex flex-wrap items-center space-x-4 text-sm text-gray-500 mt-2">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-briefcase text-yellow-600"></i>
-                                    <span>Mountenna Recruitment</span>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-map-marker-alt text-yellow-600"></i>
-                                    <span>Remote</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div
+                          <div
                         class="flex justify-center space-x-2 py-4 mb-2 relative z-30  opacity-100 transition-opacity duration-300">
-                        <a href="team_des.php?team_update_id=<?php echo $row['id']; ?>" class="action-button bg-metric-blue-light hover:bg-blue-600" title="View Profile">
+                        <a href="job_des.php?job_update_id=<?php echo $row['id']; ?>" class="action-button bg-metric-blue-light hover:bg-blue-600" title="View Profile">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="update_team.php?team_update_id=<?php echo $row['id']; ?>" class="action-button bg-course-primary hover:bg-course-orange-light"
+                        <a href="update_job.php?job_update_id=<?php echo $row['id']; ?>" class="action-button bg-course-primary hover:bg-course-orange-light"
                             title="Edit Profile">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="logics.php?team_delete_id=<?php echo $row['id']; ?>" onclick="alert('Are you sure? <?php echo ($row['t_name']) ?> has been deleted?')" class="action-button bg-metric-red-dark hover:bg-red-700" title="Delete Member">
+                        <a href="logics.php?job_delete_id=<?php echo $row['id']; ?>" onclick="alert('Are you sure? <?php echo ($row['j_title']) ?> has been deleted?')" class="action-button bg-metric-red-dark hover:bg-red-700" title="Delete Member">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                     </div>
                 </div>
+ <?php endwhile; ?>
+             
 
 
             </div>

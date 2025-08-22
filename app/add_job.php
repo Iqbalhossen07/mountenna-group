@@ -78,80 +78,53 @@
 </head>
 
 <body class="bg-dashboard-bg flex min-h-screen">
-  @include('components.sidebar')
+    <?php include('sidebar.php') ?>
+
 
     <div class="flex-1 flex flex-col transition-all duration-300 overflow-hidden" id="main-content">
-       @include('components.header')
+      <?php include('header.php') ?>
 
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
             <div class="mb-6 flex justify-between items-center">
-                <a href="{{route('admin.service')}}"
+                <a href="job.php"
                     class="inline-flex items-center text-course-primary hover:text-course-orange-light transition-colors duration-200">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Service List
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Job
                 </a>
             </div>
 
             <div class="bg-card-bg rounded-xl shadow-lg p-6 max-w-8xl mx-auto" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-text-dark mb-6 text-center">
-                    Create New Service 
+                    Create New Job 
                 </h2>
 
-                <form id="addBlogPostForm" action="{{route('admin.store_service')}}" class="space-y-6" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form id="addBlogPostForm" action="logics.php" class="space-y-6" method="POST" >
                     <div>
                         <label for="blogTitle" class="block text-sm font-medium text-gray-700">
-                          Service Title
+                          Job Title
                         </label>
-                        <input type="text" name="s_title" id="blogTitle"
+                        <input type="text" name="j_title" id="blogTitle"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-course-primary focus:border-course-primary sm:text-sm"
                             placeholder="e.g., Web Development, Mobile App Development, UI/UX Design" required />
                     </div>
 
-                    <div class="w-full">
-                        <label for="featuredImage" class="block text-sm font-medium text-gray-700 mb-2">
-                            Service Image
-                        </label>
-                        <div
-                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-gray-300 rounded-md hover:border-course-primary transition-colors duration-200 relative">
-                            <div class="space-y-1 text-center">
-                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                    viewBox="0 0 48 48" aria-hidden="true">
-                                    <path
-                                        d="M28 8H16c-1.1 0-2 .9-2 2v10m-2-10V9c0-1.1.9-2 2-2h10l4 4v8m-4-8h-8m-2 4h.01M32 34v-8m4 4h-8m0-20H16a2 2 0 00-2 2v12a2 2 0 002 2h8l-4 4v2h10v-2l-4-4h8a2 2 0 002-2V12a2 2 0 00-2-2z"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <div class="flex text-sm text-gray-600">
-                                    <label for="file-upload"
-                                        class="relative cursor-pointer bg-white rounded-md font-medium text-course-primary hover:text-course-orange-light focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-course-primary">
-                                        <span>Upload a file</span>
-                                        <input id="file-upload" name="s_image" type="file" class="sr-only"
-                                            accept="image/*" />
-                                    </label>
-                                    <p class="pl-1">or drag and drop</p>
-                                </div>
-                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                            </div>
-                            <img id="image-preview" src="#" alt="Image Preview"
-                                class="absolute inset-0 w-full h-full object-cover rounded-md hidden" />
-                        </div>
-                    </div>
+                    
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="author" class="block text-sm font-medium text-gray-700">
-                               Key Features
+                              Company name
                             </label>
-                            <input type="text" name="s_features" id="author"
+                            <input type="text" name="j_company" id="author"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-course-primary focus:border-course-primary sm:text-sm"
-                                placeholder="e.g., Responsive Desegn,SEO Optimized,Fast Performance" required />
+                                placeholder="e.g., Mountenna group" required />
                         </div>
                         <div>
                             <label for="author" class="block text-sm font-medium text-gray-700">
-                               Technologies
+                               Job type
                             </label>
-                            <input type="text" name="s_tech" id="author"
+                            <input type="text" name="j_type" id="author"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-course-primary focus:border-course-primary sm:text-sm"
-                                placeholder="e.g., React,Next.js,Node.js, Typescript" required />
+                                placeholder="e.g., Full-Time,Remote" required />
                         </div>
 
                     
@@ -161,7 +134,7 @@
                         <label for="blogContent" class="block text-sm font-medium text-gray-700">
                            Description
                         </label>
-                        <textarea name="s_des" id="blogContent" rows="10"
+                        <textarea name="j_des" id="blogContent" rows="10"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-course-primary focus:border-course-primary sm:text-sm"
                             placeholder="Write your description content here..." required></textarea>
                     </div>
@@ -169,10 +142,10 @@
                 
 
                     <div class="flex justify-end pt-6 border-t border-gray-200 mt-6">
-                        <button type="submit"
+                        <button type="submit" name="add_job"
                             class="bg-course-primary text-white px-6 py-3 rounded-lg shadow-md hover:bg-course-orange-light transition-colors duration-200 flex items-center space-x-2 text-lg font-semibold">
                             <i class="fas fa-paper-plane mr-2"></i>
-                            <span>Submit Service</span>
+                            <span>Submit Job</span>
                         </button>
                     </div>
                 </form>

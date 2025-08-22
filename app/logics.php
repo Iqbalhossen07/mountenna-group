@@ -359,3 +359,63 @@ if (isset($_GET['contact_delete_id'])) {
   $_SESSION['message_type'] = 'danger';
   header("location:contact.php");
 }
+
+
+
+
+
+
+
+
+// Add job  Logic
+if (isset($_POST['add_job'])) {
+  $j_title = $_POST['j_title'];
+  $j_company = $_POST['j_company'];
+  $j_type = $_POST['j_type'];
+  $j_des = $_POST['j_des'];
+
+
+  // Insert query
+  $mysqli->query("INSERT INTO career (j_title, j_company, j_type, j_des ) VALUES ('$j_title', '$j_company', '$j_type', '$j_des')");
+
+  // Flash message
+  $_SESSION['message'] = "Job has been added successfully!";
+  $_SESSION['message_type'] = 'success';
+
+  header("location:job.php");
+  exit();
+}
+
+
+// Update team  Logic
+
+if (isset($_POST['update_job'])) {
+  $job_update_id = $_POST['id'];
+  $j_title = $_POST['j_title'];
+  $j_company = $_POST['j_company'];
+  $j_type = $_POST['j_type'];
+  $j_des = $_POST['j_des'];
+
+
+  $mysqli->query("UPDATE `career` SET `j_title` = '$j_title', `j_title` = '$j_title', `j_company` = '$j_company', `j_type` = '$j_type', `j_des` = '$j_des' WHERE id=$job_update_id");
+
+  move_uploaded_file($tmpName, $folder);
+  $_SESSION['message'] = "Job has been updated";
+  $_SESSION['message_type'] = 'warning';
+  header('location:job.php');
+}
+
+
+
+// Delete team  Logic
+
+if (isset($_GET['job_delete_id'])) {
+  $id = $_GET['job_delete_id'];
+
+  $mysqli->query("DELETE FROM career WHERE id=$id");
+
+  $_SESSION['message'] = "Job has been deleted";
+  $_SESSION['message_type'] = 'danger';
+  header("location:job.php");
+}
+

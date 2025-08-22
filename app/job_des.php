@@ -1,3 +1,26 @@
+<?php include('db.php');
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+}
+
+
+if (isset($_GET['job_update_id'])) {
+    $job_update_id = $_GET['job_update_id'];
+    $job_update_id_result = $mysqli->query("SELECT * FROM career WHERE id='$job_update_id' ");
+    if (!empty($job_update_id_result)) {
+        $row = $job_update_id_result->fetch_array();
+
+        $j_title = $row['j_title'];
+        $j_company = $row['j_company'];
+        $j_type = $row['j_type'];
+        $j_des = $row['j_des'];
+       
+     
+    }
+
+   
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +38,7 @@
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('back/style.css') }}" />
+    <link rel="stylesheet" href="style.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -78,43 +101,32 @@
 </head>
 
 <body class="bg-dashboard-bg flex min-h-screen">
-    @include('components.sidebar')
+    <?php include('sidebar.php') ?>
 
     <div class="flex-1 flex flex-col transition-all duration-300 overflow-hidden" id="main-content">
-        @include('components.header')
+      <?php include('header.php') ?>
 
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
             <div class="mb-6 flex justify-between items-center">
-                <a href="{{route('admin.service')}}"
+                <a href="job.php"
                     class="inline-flex items-center text-course-primary hover:text-course-orange-light transition-colors duration-200">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Service List
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Job List
                 </a>
-                <div class="flex space-x-2">
-                    <a href="{{route('admin.edit_service',$service->id)}}"
-                        class="bg-course-primary text-white px-4 py-2 rounded-lg shadow-md hover:bg-course-orange-light transition-colors duration-200 flex items-center space-x-2">
-                        <i class="fas fa-edit"></i>
-                        <span>Edit Service</span>
-                </a>
-                    <a href="{{route('admin.service_delete',$service->id)}}" onclick="alert('Are you sure?{{$service->s_title}} has been deleted?')"
-                        class="bg-metric-red-dark text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors duration-200 flex items-center space-x-2">
-                        <i class="fas fa-trash-alt"></i>
-                        <span>Delete Service</span>
-            </a>
-                </div>
+           
             </div>
 
             <div class="bg-card-bg rounded-xl shadow-lg p-6 max-w-5xl mx-auto" data-aos="fade-up">
              
                 <div class="px-2 md:px-6">
                     <h1 class="text-4xl lg:text-5xl font-extrabold text-text-dark leading-tight mb-4">
-                                    {{$service->s_title}}
+                                    <?php echo $row['j_title']; ?>
                     </h1>
                 
 
                     <div
                         class="prose max-w-none text-text-dark leading-relaxed text-lg mb-8  border-gray-200 pb-8">
                         <p class="mb-4">
-                               {{$service->s_des}}
+                            <?php echo $row['j_des']; ?>
                         </p>
 
                      
@@ -129,7 +141,7 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{{ asset('back/main.js') }}"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
