@@ -45,37 +45,29 @@
                     <p class="font-sans text-gray-600 mb-8">Have a question or a project in mind? Fill out the form
                         below.</p>
 
-                    <form action="admin/logics.php" method="POST" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
+                    <form action="app/logics.php" method="POST" class="space-y-6">
+                        <div>
                                 <label for="first_name"
-                                    class="block text-sm font-semibold font-sans text-gray-700 mb-2">First Name</label>
-                                <input type="text" id="first_name" name="first_name" required
+                                    class="block text-sm font-semibold font-sans text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="user_name" name="user_name" required
                                     class="w-full px-4 py-3 bg-gray-100 border-0 border-b-2 border-gray-300 focus:border-royal-500 focus:ring-0 focus:outline-none transition">
                             </div>
-                            <div>
-                                <label for="last_name"
-                                    class="block text-sm font-semibold font-sans text-gray-700 mb-2">Last Name</label>
-                                <input type="text" id="last_name" name="last_name" required
-                                    class="w-full px-4 py-3 bg-gray-100 border-0 border-b-2 border-gray-300 focus:border-royal-500 focus:ring-0 focus:outline-none transition">
-                            </div>
-                        </div>
                         <div>
                             <label for="email" class="block text-sm font-semibold font-sans text-gray-700 mb-2">Email
                                 Address</label>
-                            <input type="email" id="email" name="email" required
+                            <input type="email" id="email" name="user_email" required
                                 class="w-full px-4 py-3 bg-gray-100 border-0 border-b-2 border-gray-300 focus:border-royal-500 focus:ring-0 focus:outline-none transition">
                         </div>
                         <div>
                             <label for="subject"
-                                class="block text-sm font-semibold font-sans text-gray-700 mb-2">Subject</label>
-                            <input type="text" id="subject" name="subject" required
+                                class="block text-sm font-semibold font-sans text-gray-700 mb-2">Address</label>
+                            <input type="text" id="subject" name="user_address" required
                                 class="w-full px-4 py-3 bg-gray-100 border-0 border-b-2 border-gray-300 focus:border-royal-500 focus:ring-0 focus:outline-none transition">
                         </div>
                         <div>
                             <label for="message"
                                 class="block text-sm font-semibold font-sans text-gray-700 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" required
+                            <textarea id="message" name="user_message" rows="5" required
                                 class="w-full px-4 py-3 bg-gray-100 border-0 border-b-2 border-gray-300 focus:border-royal-500 focus:ring-0 focus:outline-none transition"></textarea>
                         </div>
                         <div>

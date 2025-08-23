@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <!-- New Font Imports -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
@@ -610,6 +610,56 @@
     </section>
 
 
+    <section id="gallery" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="inline-block mb-4">
+                    <span class="bg-royal-100 text-royal-800 px-4 py-2 rounded-full text-sm font-semibold font-sans">
+                        Our Gallery
+                    </span>
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 font-heading gradient-text">
+                    Moments We Cherish
+                </h2>
+                <p class="text-xl text-gray-600 leading-relaxed font-sans">
+                    A glimpse into our vibrant culture, collaborative events, and the milestones we've achieved together.
+                </p>
+            </div>
+
+            <div class="swiper myGallerySwiper">
+                <div class="swiper-wrapper">
+                    <?php
+
+
+                    $gallery = $mysqli->query("SELECT * FROM gallery_images");
+
+
+                    // Fetch and display the titles
+                    while ($row = $gallery->fetch_assoc()):
+
+                    ?>
+                        <div class="swiper-slide">
+                            <div class="group relative overflow-hidden rounded-2xl shadow-lg h-80">
+                                <img src="app/g_images/<?php echo ($row['g_image']) ?>" alt="Team Collaboration" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105">
+
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+
+
+                </div>
+
+                <!-- <div class="flex items-center justify-center mt-8 space-x-6">
+                    <div class="swiper-button-prev static w-12 h-12 after:text-base"></div>
+                    <div class="swiper-pagination !static !w-auto"></div>
+                    <div class="swiper-button-next static w-12 h-12 after:text-base"></div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+
+
 
 
 
@@ -742,10 +792,10 @@
                                 <a href="#" class="block">
                                     <h3
                                         class="font-heading text-xl font-bold text-navy-900 mb-3 group-hover:text-royal-600 transition-colors">
-                                       <?php echo ($row['b_title']) ?></h3>
+                                        <?php echo ($row['b_title']) ?></h3>
                                 </a>
                                 <p class="font-sans text-gray-600 text-sm leading-relaxed mb-4">
-                                  <?php echo ($row['b_des']) ?>
+                                    <?php echo ($row['b_des']) ?>
                                 </p>
                             </div>
                             <div class="flex-grow"></div>
@@ -858,46 +908,35 @@
                 <!-- Contact Form -->
                 <div class="bg-white rounded-2xl shadow-xl p-8">
                     <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
-                    <form id="contactForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-4">
+                    <form class="space-y-6" action="app/logics.php" method="post">
+                       
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                                <input type="text"
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" name="user_name"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent transition-colors duration-200"
-                                    placeholder="Enter your first name" required>
+                                    placeholder="Enter your full name" required>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                                <input type="text"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent transition-colors duration-200"
-                                    placeholder="Enter your last name" required>
-                            </div>
-                        </div>
+                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email"
+                            <input type="email" name="user_email"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent transition-colors duration-200"
                                 placeholder="Enter your email address" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Division of Interest</label>
-                            <select
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                            <input type="text" name="user_address"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent transition-colors duration-200"
-                                required>
-                                <option value="">Select a division</option>
-                                <option value="education">Mountenna Edu</option>
-                                <option value="technology">Mountenna Tech</option>
-                                <option value="recruitment">Mountenna Recruitment</option>
-                                <option value="general">General Inquiry</option>
-                            </select>
+                                placeholder="Enter your email address" required>
                         </div>
+                      
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                            <textarea rows="4"
+                            <textarea rows="4" name="user_message"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent transition-colors duration-200"
                                 placeholder="Tell us about your requirements..." required></textarea>
                         </div>
-                        <button type="submit"
+                        <button type="submit" name="contact_form_submit"
                             class="w-full bg-royal-600 hover:bg-royal-700 text-white py-3 rounded-lg font-semibold transition-colors duration-300">
                             Send Message
                             <i class="fas fa-paper-plane ml-2"></i>
@@ -984,9 +1023,46 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <?php include "footer.php" ?>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const swiper = new Swiper('.myGallerySwiper', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        });
+    </script>
+
     <script src="main.js"></script>
 </body>
 

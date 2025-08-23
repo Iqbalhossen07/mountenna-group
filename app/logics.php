@@ -1,7 +1,9 @@
 <?php
 include('db.php');
 
-
+// PHPMailer দিয়ে ইমেইল পাঠানো
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 
 // admin lawyer logic
@@ -387,7 +389,7 @@ if (isset($_POST['add_job'])) {
 }
 
 
-// Update team  Logic
+// Update job  Logic
 
 if (isset($_POST['update_job'])) {
   $job_update_id = $_POST['id'];
@@ -407,7 +409,7 @@ if (isset($_POST['update_job'])) {
 
 
 
-// Delete team  Logic
+// Delete job  Logic
 
 if (isset($_GET['job_delete_id'])) {
   $id = $_GET['job_delete_id'];
@@ -419,3 +421,182 @@ if (isset($_GET['job_delete_id'])) {
   header("location:job.php");
 }
 
+
+
+
+// Add booking  Logic
+if (isset($_POST['add_booking'])) {
+  $u_name = $_POST['u_name'];
+  $u_email = $_POST['u_email'];
+  $u_phone = $_POST['u_phone'];
+  $u_message = $_POST['u_message'];
+  $booking_id = $_POST['j_id'];
+
+  $uniqueId = date("YmdHis");
+    // Image upload
+  $u_cv = $_FILES['u_cv']['name'];
+  $tmpName = $_FILES['u_cv']['tmp_name'];
+  $folder  = 'user_cv/' . $u_cv;
+
+
+
+
+
+  // Insert query
+  $mysqli->query("INSERT INTO booking (u_name, u_email, u_phone, u_message, u_cv,j_id ) VALUES ('$u_name', '$u_email', '$u_phone', '$u_message', '$u_cv', '$booking_id')");
+
+
+  move_uploaded_file($tmpName, $folder);
+
+ try {
+        require '../vendor/autoload.php';
+        require '../vendor/phpmailer/phpmailer/src/Exception.php';
+        require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+        require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'stonebridgeofficial01@gmail.com';  
+        $mail->Password   = 'dsagmuhyivobtouo'; 
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
+
+        // ================= USER MAIL =================
+        $mail->setFrom('stonebridgeofficial01@gmail.com', 'Mountenna Group');
+        $mail->addAddress($u_email, $u_name);
+        $mail->isHTML(true);
+        $mail->Subject = "Your Application has been Received - Mountenna Group [ID: $uniqueId]";
+        $mail->Body = "
+            <h2>Thank you for your application!</h2>
+            <p>Dear <strong>$u_name</strong>,</p>
+            <p>We have successfully received your application for your desired course. Below are the details we have received:</p>
+            <ul>
+                <li><strong>Email:</strong> $u_email</li>
+            </ul>
+          
+            <p>Your application is currently under review, and we will get back to you with the next steps shortly.</p>
+            <p>Thank you for choosing Mountenna Group. We look forward to assisting you with your educational journey.</p>
+            <br>
+            <p>Best regards,<br>Mountenna Group Team</p>
+        ";
+        $mail->send();
+
+        // ================= ADMIN MAIL =================
+        $mail->clearAddresses();
+        $mail->addAddress('stonebridgeofficial01@gmail.com', 'Admin');
+
+        // CV attach
+        $mail->addAttachment($folder, $newFileName);
+
+        $mail->Subject = "New Application Received - Mountenna Group [ID: $uniqueId]";
+        $mail->Body = "
+            <h2>New Application Received</h2>
+            <p>Dear Admin,</p>
+            <p>A new application has been submitted. Below are the details provided by the applicant:</p>
+            <ul>
+                <li><strong>Applicant Name:</strong> $u_name</li>
+                <li><strong>Email:</strong> $u_email</li>
+                <li><strong>Phone Number:</strong> $u_phone</li>
+                <li><strong>Message:</strong> $u_message</li>
+            </ul>
+            <p>The application status is currently marked as <strong>'pending'</strong>.</p>
+            <p>Kindly review the application details and proceed with the necessary actions.</p>
+            <p>Thank you for your attention to this matter.</p>
+            <br>
+            <p>Best regards,<br>Mountenna Group Team</p>
+        ";
+        $mail->send();
+
+        $_SESSION['message'] = "Application has been successfully added, and emails have been sent.";
+        $_SESSION['message_type'] = 'success';
+    } catch (Exception $e) {
+        $_SESSION['message'] = "Application has been added, but email sending failed: " . $mail->ErrorInfo;
+        $_SESSION['message_type'] = 'warning';
+    }
+
+    // Flash message
+    $_SESSION['message'] = "Application has been added successfully!";
+    $_SESSION['message_type'] = 'success';
+
+    header("location:../confirmation.php");
+    exit();
+}
+
+ 
+// contact_form_submit
+
+if (isset($_POST['contact_form_submit'])) {
+  $user_name = $_POST['user_name'];
+  $user_email = $_POST['user_email'];
+  $user_address = $_POST['user_address'];
+  $user_message = $_POST['user_message'];
+
+  $uniqueId = date("YmdHis");
+
+
+
+
+  // Insert query
+  $mysqli->query("INSERT INTO user_message (user_name, user_email, user_address, user_message ) VALUES ('$user_name', '$user_email', '$user_address', '$user_message')");
+
+
+
+ try {
+        require '../vendor/autoload.php';
+        require '../vendor/phpmailer/phpmailer/src/Exception.php';
+        require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+        require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'stonebridgeofficial01@gmail.com';  
+        $mail->Password   = 'dsagmuhyivobtouo'; 
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
+        $mail->isHTML(true);
+
+
+  
+
+        // ================= ADMIN MAIL =================
+        $mail->clearAddresses();
+        $mail->addAddress('stonebridgeofficial01@gmail.com', 'Admin');
+
+   
+
+        $mail->Subject = "New User message - Mountenna Group [ID: $uniqueId]";
+        $mail->Body = "
+            <h2>New user message Received</h2>
+            <p>Dear Admin,</p>
+            <p>A new message has been submitted. Below are the details provided by the applicant:</p>
+            <ul>
+                <li><strong>Applicant Name:</strong> $user_name</li>
+                <li><strong>Email:</strong> $user_email</li>
+                <li><strong>Address:</strong> $user_address</li>
+                <li><strong>Message:</strong> $user_message</li>
+            </ul>
+            <p>Kindly review the application details and proceed with the necessary actions.</p>
+            <p>Thank you for your attention to this matter.</p>
+            <br>
+            <p>Best regards,<br>Mountenna Group Team</p>
+        ";
+        $mail->send();
+
+        $_SESSION['message'] = "Application has been successfully added, and emails have been sent.";
+        $_SESSION['message_type'] = 'success';
+    } catch (Exception $e) {
+        $_SESSION['message'] = "Application has been added, but email sending failed: " . $mail->ErrorInfo;
+        $_SESSION['message_type'] = 'warning';
+    }
+
+    // Flash message
+    $_SESSION['message'] = "Application has been added successfully!";
+    $_SESSION['message_type'] = 'success';
+
+    header("location:../confirmations.php");
+    exit();
+}

@@ -131,8 +131,8 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 sm:mt-0">
-                                    <a href="booking.php?booking_id=<?php echo $row['id']; ?>" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
-                                        Apply Now
+                                    <a href="career-details.php?booking_id=<?php echo $row['id']; ?>" class="bg-royal-100 text-royal-800 hover:bg-royal-200 px-6 py-2 rounded-lg font-semibold transition-colors duration-200">
+                                        Details
                                     </a>
                                 </div>
                             </div>

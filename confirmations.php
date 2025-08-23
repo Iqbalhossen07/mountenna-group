@@ -34,10 +34,7 @@
                 <h1 class="text-4xl lg:text-5xl font-bold font-heading gradient-text">
                     Thank You!
                 </h1>
-                
-                <p class="mt-4 text-lg text-gray-600 font-sans">
-                    Your consultation request has been successfully submitted. We are thrilled to help you on your journey!
-                </p>
+              
                 
                 <hr class="my-8 border-gray-200">
 

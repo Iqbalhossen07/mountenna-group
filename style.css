@@ -353,3 +353,46 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url('img/sl1.jpg');
 }
 /* You can add more for other pages here, e.g., .hero-bg-tech */
+
+
+
+
+
+
+
+ 
+    .swiper-button-next,
+    .swiper-button-prev {
+        position: static; /* Important for flex layout */
+        width: 48px;
+        height: 48px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        color: #1e3a8a; /* navy-900 */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background-color: #2563eb; /* royal-600 */
+        color: white;
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .swiper-pagination {
+        position: static; /* Important for flex layout */
+        width: auto !important; /* Override Swiper's default width */
+    }
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background-color: #d1d5db; /* gray-300 */
+        opacity: 1;
+        transition: background-color 0.3s ease;
+    }
+    .swiper-pagination-bullet-active {
+        background-color: #2563eb; /* royal-600 */
+    }

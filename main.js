@@ -10,6 +10,8 @@
 // Global State & Variables
 // --------------------------------------------------------------------------
 
+
+
 let currentSlide = 0;
 let isAutoplay = true;
 let autoplayInterval;
@@ -339,3 +341,6 @@ function toggleServiceMenu(event) {
         icon.classList.add('rotate-180');
     }
 }
+
+
+

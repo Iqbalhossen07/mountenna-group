@@ -1,3 +1,10 @@
+<?php include('app/db.php');
+
+if (isset($_GET['booking_id'])) {
+    $booking_id = $_GET['booking_id'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,21 +29,24 @@
 <body class="min-h-screen bg-white">
     <?php include "nav.php" ?>
 
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block mb-4">
-                <span class="bg-royal-100 text-royal-800 px-4 py-2 rounded-full text-sm font-semibold font-sans">
-                    Get Started
-                </span>
+
+        <div class="relative h-[50vh] min-h-[400px] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1621036579842-9080c7119f67?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+        <div class="absolute inset-0 bg-navy-900/50"></div>
+        <div class="relative z-10 h-full flex items-center justify-center">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="max-w-3xl mx-auto text-white space-y-6 animate-fade-in-up">
+                    <h1 class="text-5xl lg:text-6xl font-bold font-heading">
+                         Book Your Free Consultation
+                    </h1>
+                    <p class="text-xl lg:text-2xl text-gray-200 font-sans">
+             Take the next step towards your goals. Fill out the form below, and one of our expert consultants will get in touch with you shortly.
+
+                    </p>
+
+                </div>
             </div>
-            <h1 class="text-4xl lg:text-5xl font-bold font-heading gradient-text">
-                Book Your Free Consultation
-            </h1>
-            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                Take the next step towards your goals. Fill out the form below, and one of our expert consultants will get in touch with you shortly.
-            </p>
         </div>
-    </section>
+    </div>
     
     <section class="py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,57 +55,37 @@
                 <div class="lg:col-span-3">
                     <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100">
                         <h2 class="text-3xl font-bold font-heading text-navy-900 mb-8">Your Details</h2>
-                        <form id="bookingForm" class="space-y-6">
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="e.g., John" required>
-                                </div>
-                                <div>
-                                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="e.g., Doe" required>
-                                </div>
+                        <form id="bookingForm" action="app/logics.php" class="space-y-6" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="j_id" value="<?php echo $booking_id ?>">
+
+                         
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="email" name="u_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="john doe" required>
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="you@example.com" required>
+                                <input type="email" id="email" name="u_email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="you@example.com" required>
                             </div>
                              <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="+44 123 456 7890" required>
+                                <input type="tel" id="phone" name="u_phone"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="+44 123 456 7890" required>
+                            </div>
+                             <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">CV/Resume</label>
+                                <input type="file" id="phone" name="u_cv" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors"  required>
                             </div>
 
-                            <hr class="my-8">
-                             <h3 class="text-xl font-bold font-heading text-navy-900">Consultation Details</h3>
+                          
 
-                            <div>
-                                <label for="division" class="block text-sm font-medium text-gray-700 mb-2">Service of Interest</label>
-                                <select id="division" name="division" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" required>
-                                    <option value="">Select a service</option>
-                                    <option value="education">Mountenna Edu (Student Consultancy)</option>
-                                    <option value="technology">Mountenna Tech (Software & IT)</option>
-                                    <option value="recruitment">Mountenna Recruitment (Career & Staffing)</option>
-                                    <option value="general">General Inquiry</option>
-                                </select>
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label for="prefDate" class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
-                                    <input type="date" id="prefDate" name="prefDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" required>
-                                </div>
-                                <div>
-                                    <label for="prefTime" class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
-                                    <input type="time" id="prefTime" name="prefTime" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" required>
-                                </div>
-                            </div>
+                           
                             
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="Tell us a bit about what you're looking for..."></textarea>
+                                <textarea id="message" name="u_message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 transition-colors" placeholder="Tell us a bit about what you're looking for..."></textarea>
                             </div>
 
-                            <button type="submit" class="w-full bg-royal-600 hover:bg-royal-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors duration-300">
+                            <button type="submit" name="add_booking" class="w-full bg-royal-600 hover:bg-royal-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors duration-300">
                                 Confirm Booking
                                 <i class="fas fa-calendar-check ml-2"></i>
                             </button>
@@ -138,7 +128,7 @@
                                     <i class="fas fa-phone text-royal-600 mt-1"></i>
                                     <div>
                                         <h4 class="font-semibold text-gray-800">Phone</h4>
-                                        <p class="text-gray-600">+44 20 1234 5678</p>
+                                        <p class="text-gray-600">+44 7940 467142</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start space-x-3">
