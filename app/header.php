@@ -22,8 +22,7 @@
              <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Avatar"
                  class="w-10 h-10 rounded-full object-cover border-2 border-course-primary shadow-sm" />
      
-                 admin
-                 </span>
+
           
                  <span class="font-medium text-gray-700 hidden sm:block">Admin</span>
           

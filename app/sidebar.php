@@ -1,10 +1,10 @@
 <aside
     class="w-64 bg-sidebar-bg text-white flex-shrink-0 min-h-screen flex flex-col fixed md:relative z-40 transition-all duration-300 -translate-x-full md:translate-x-0 shadow-lg"
     id="sidebar">
-    <div class=" p-6 border-b border-gray-700">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 group text-white">
+    <div class="bg-white p-6 border-b border-gray-700">
+        <a href="index.php" class="flex items-center space-x-3 group text-white">
           
-            <span class="text-2xl font-bold tracking-wide"><img class="w-3/4" src="{{asset('img/logo.webp')}}" alt=""></span>
+            <span class="text-2xl font-bold tracking-wide"><img class="w-3/4" src="../img/logo.png" alt=""></span>
         </a>
     </div>
 <?php
