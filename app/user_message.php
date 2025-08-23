@@ -1,3 +1,9 @@
+<?php include('db.php');
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,12 +86,12 @@
 <body class="bg-dashboard-bg flex min-h-screen">
     <?php include('sidebar.php') ?>
     <div class="flex-1 flex flex-col transition-all duration-300 overflow-hidden" id="main-content">
-       <?php include('header.php') ?>
+        <?php include('header.php') ?>
 
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
             <div class="flex flex-wrap justify-between items-center mb-6" data-aos="fade-down" data-aos-delay="100">
                 <h2 class="text-xl font-bold text-gray-800 hidden sm:block">All Messages</h2>
-              
+
             </div>
 
             <div class="bg-card-bg rounded-xl shadow-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
@@ -99,16 +105,16 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                   User Name
+                                    User Name
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  User Email
+                                    User Email
                                 </th>
-                             
+
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    User Phone
+                                    User Address
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -117,34 +123,43 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($messages as $message)
+                            <?php
+
+
+                            $gallery = $mysqli->query("SELECT * FROM user_message");
+
+
+                            // Fetch and display the titles
+                            while ($row = $gallery->fetch_assoc()):
+
+                            ?>
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        #BK-{{ $message->id }}
+                                        #BK-<?php echo ($row['id']) ?>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                        {{ $message->user_name }} 
-                                  
+                                      <?php echo ($row['user_name']) ?>
+
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                        {{ $message->user_email }}
+                                    <?php echo ($row['user_email']) ?>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                        {{ $message->user_phone }}
+                                       <?php echo ($row['user_address']) ?>
                                     </td>
-                               
-                                 
+
+
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex items-center justify-center space-x-2">
-                                            
-                                            <a href="{{route('admin.user_delete',$message->id)}}" onclick="alert('Are you sure?{{$message->user_name}} has been deleted?')" class="action-button bg-course-red"
+
+                                            <a href="logics.php?user_delete_id=<?php echo ($row['id']) ?>" onclick="alert('Are you sure?<?php echo ($row['user_name']) ?> has been deleted?')" class="action-button bg-course-red"
                                                 title="Delete Booking">
                                                 <i class="fas fa-trash-alt text-base"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endwhile; ?>
 
                         </tbody>
                     </table>

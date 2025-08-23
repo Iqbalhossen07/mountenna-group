@@ -265,6 +265,7 @@ if (!isset($_SESSION['email'])) {
             <div class="bg-card-bg rounded-xl shadow-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
                 <h2 class="text-xl font-bold text-gray-800 hidden sm:block mb-4">All Messages</h2>
 
+             <div class="bg-card-bg rounded-xl shadow-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="table-responsive">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -284,7 +285,7 @@ if (!isset($_SESSION['email'])) {
 
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    User Phone
+                                    User Address
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -293,38 +294,48 @@ if (!isset($_SESSION['email'])) {
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    #BK-1
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                    Iqbal Hossen
-
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                    iqbalhossen0711@gmail.com
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                    01781834638
-                                </td>
+                            <?php
 
 
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex items-center justify-center space-x-2">
+                            $gallery = $mysqli->query("SELECT * FROM user_message");
 
-                                        <a href="{{route('admin.user_delete',$message->id)}}" onclick="alert('Are you sure?{{$message->user_name}} has been deleted?')" class="action-button bg-course-red"
-                                            title="Delete Booking">
-                                            <i class="fas fa-trash-alt text-base"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
 
+                            // Fetch and display the titles
+                            while ($row = $gallery->fetch_assoc()):
+
+                            ?>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        #BK-<?php echo ($row['id']) ?>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                      <?php echo ($row['user_name']) ?>
+
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    <?php echo ($row['user_email']) ?>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                       <?php echo ($row['user_address']) ?>
+                                    </td>
+
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex items-center justify-center space-x-2">
+
+                                            <a href="logics.php?admin_user_delete_id=<?php echo ($row['id']) ?>" onclick="alert('Are you sure?<?php echo ($row['user_name']) ?> has been deleted?')" class="action-button bg-course-red"
+                                                title="Delete Booking">
+                                                <i class="fas fa-trash-alt text-base"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
 
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
 
 

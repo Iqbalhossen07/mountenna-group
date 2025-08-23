@@ -600,3 +600,34 @@ if (isset($_POST['contact_form_submit'])) {
     header("location:../confirmations.php");
     exit();
 }
+
+
+
+
+
+
+// Delete message  Logic
+
+if (isset($_GET['user_delete_id'])) {
+  $id = $_GET['user_delete_id'];
+
+  $mysqli->query("DELETE FROM user_message WHERE id=$id");
+
+  $_SESSION['message'] = "User has been deleted";
+  $_SESSION['message_type'] = 'danger';
+  header("location:user_message.php");
+}
+
+
+
+// Delete admin message  Logic
+
+if (isset($_GET['admin_user_delete_id'])) {
+  $id = $_GET['admin_user_delete_id'];
+
+  $mysqli->query("DELETE FROM user_message WHERE id=$id");
+
+  $_SESSION['message'] = "User has been deleted";
+  $_SESSION['message_type'] = 'danger';
+  header("location:index.php");
+}
