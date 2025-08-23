@@ -1,6 +1,6 @@
 <?php include('db.php');
 if (!isset($_SESSION['email'])) {
-  header('Location: login.php');
+    header('Location: login.php');
 }
 
 ?>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mountenna Tech</title>
+    <title>Mountenna Group</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,54 +83,31 @@ if (!isset($_SESSION['email'])) {
 <body class="bg-dashboard-bg flex min-h-screen">
     <?php include "sidebar.php" ?>
 
-   
+
 
     <div class="flex-1 flex flex-col transition-all duration-300 overflow-hidden" id="main-content">
 
-    <?php include "header.php" ?>
+        <?php include "header.php" ?>
 
 
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mb-8">
-              <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-all duration-300 hover:scale-[1.02] group hover:bg-icon-bg-orange"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex flex-col">
-                        <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-course-primary transition-colors duration-300">
-                            4</div>
-                        <div class="text-sm font-semibold text-text-light mt-1">
-                            Pending Bookings
-                        </div>
-                    </div>
-                    <div
-                        class="w-12 h-12 bg-icon-bg-orange text-course-primary rounded-full flex items-center justify-center text-xl shadow-md">
-                        <i class="fas fa-hourglass-half"></i>
-                    </div>
-                </div>
 
-                <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-all duration-300 hover:scale-[1.02] group hover:bg-icon-bg-green"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex flex-col">
-                        <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-metric-green transition-colors duration-300">
-                            0</div>
-                        <div class="text-sm font-semibold text-text-light mt-1">
-                            Accepted Bookings
-                        </div>
-                    </div>
-                    <div
-                        class="w-12 h-12 bg-icon-bg-green text-metric-green rounded-full flex items-center justify-center text-xl shadow-md">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                </div>
+
 
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-icon-bg-gray"
                     data-aos="fade-up" data-aos-delay="300">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM booking");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
                             class="text-4xl font-extrabold text-text-dark group-hover:text-gray-700 transition-colors duration-300">
-                            4</div>
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
                             All Bookings
                         </div>
@@ -139,14 +116,20 @@ if (!isset($_SESSION['email'])) {
                         class="w-12 h-12 bg-icon-bg-gray text-gray-700 rounded-full flex items-center justify-center text-xl shadow-md">
                         <i class="fas fa-box"></i>
                     </div>
-                </div> 
+                </div>
 
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-icon-bg-blue"
                     data-aos="fade-up" data-aos-delay="400">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM teams");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
                             class="text-4xl font-extrabold text-text-dark group-hover:text-blue-700 transition-colors duration-300">
-                         4</div>
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
                             Total Members
                         </div>
@@ -160,9 +143,15 @@ if (!isset($_SESSION['email'])) {
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-icon-bg-red"
                     data-aos="fade-up" data-aos-delay="500">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM testimonials");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-course-accent transition-colors duration-300">
-                           4</div>
+                            class="text-4xl font-extrabold text-text-dark group-hover:text-blue-700 transition-colors duration-300">
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
                             Total Testimonials
                         </div>
@@ -176,25 +165,37 @@ if (!isset($_SESSION['email'])) {
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-icon-bg-green"
                     data-aos="fade-up" data-aos-delay="600">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM booking");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-metric-green transition-colors duration-300">
-                        4</div>
+                            class="text-4xl font-extrabold text-text-dark group-hover:text-blue-700 transition-colors duration-300">
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
-                            Total Services
+                           Job
                         </div>
                     </div>
                     <div
                         class="w-12 h-12 bg-icon-bg-green text-metric-green rounded-full flex items-center justify-center text-xl shadow-md">
-                        <i class="fas fa-hand-holding-usd"></i>
+                        <i class="fas fa-code"></i>
                     </div>
                 </div>
 
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-gray-200"
                     data-aos="fade-up" data-aos-delay="700">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM blogs");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-gray-600 transition-colors duration-300">
-                            5</div>
+                            class="text-4xl font-extrabold text-text-dark group-hover:text-blue-700 transition-colors duration-300">
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
                             Total Blogs
                         </div>
@@ -205,27 +206,19 @@ if (!isset($_SESSION['email'])) {
                     </div>
                 </div>
 
+
                 <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-gray-200"
                     data-aos="fade-up" data-aos-delay="800">
                     <div class="flex flex-col">
+                        <?php
+
+                        $result = $mysqli->query("SELECT * FROM gallery_images");
+                        $count = $result->num_rows;
+
+                        ?>
                         <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-gray-600 transition-colors duration-300">
-                            6</div>
-                        <div class="text-sm font-semibold text-text-light mt-1">
-                            Total Portfolio
-                        </div>
-                    </div>
-                    <div
-                        class="w-12 h-12 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center text-xl shadow-md">
-                   <i class="fas fa-briefcase"></i>
-                    </div>
-                </div>
-                <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-gray-200"
-                    data-aos="fade-up" data-aos-delay="800">
-                    <div class="flex flex-col">
-                        <div
-                            class="text-4xl font-extrabold text-text-dark group-hover:text-gray-600 transition-colors duration-300">
-                             7</div>
+                            class="text-4xl font-extrabold text-text-dark group-hover:text-blue-700 transition-colors duration-300">
+                            <?php echo $count; ?></div>
                         <div class="text-sm font-semibold text-text-light mt-1">
                             Total Gallery
                         </div>
@@ -236,7 +229,7 @@ if (!isset($_SESSION['email'])) {
                     </div>
                 </div>
 
-                <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-gray-200"
+                <!-- <div class="bg-card-bg rounded-xl shadow-lg p-5 flex items-center justify-between transform transition-transform duration-300 hover:scale-[1.02] group hover:bg-gray-200"
                     data-aos="fade-up" data-aos-delay="900">
                     <div class="flex flex-col">
                         <div
@@ -266,10 +259,10 @@ if (!isset($_SESSION['email'])) {
                         class="w-12 h-12 bg-gray-200 text-gray-600 rounded-full flex items-center justify-center text-xl shadow-md">
                         <i class="fas fa-clock"></i>
                     </div>
-                </div> 
+                </div>  -->
             </div>
 
-       <div class="bg-card-bg rounded-xl shadow-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-card-bg rounded-xl shadow-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
                 <h2 class="text-xl font-bold text-gray-800 hidden sm:block mb-4">All Messages</h2>
 
                 <div class="table-responsive">
@@ -282,13 +275,13 @@ if (!isset($_SESSION['email'])) {
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                   User Name
+                                    User Name
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  User Email
+                                    User Email
                                 </th>
-                             
+
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     User Phone
@@ -300,34 +293,34 @@ if (!isset($_SESSION['email'])) {
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                          
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        #BK-1
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                       Iqbal Hossen
-                                  
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                        iqbalhossen0711@gmail.com
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                      01781834638
-                                    </td>
-                               
-                                 
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex items-center justify-center space-x-2">
-                                            
-                                            <a href="{{route('admin.user_delete',$message->id)}}" onclick="alert('Are you sure?{{$message->user_name}} has been deleted?')" class="action-button bg-course-red"
-                                                title="Delete Booking">
-                                                <i class="fas fa-trash-alt text-base"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                        
+
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #BK-1
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    Iqbal Hossen
+
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    iqbalhossen0711@gmail.com
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    01781834638
+                                </td>
+
+
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="flex items-center justify-center space-x-2">
+
+                                        <a href="{{route('admin.user_delete',$message->id)}}" onclick="alert('Are you sure?{{$message->user_name}} has been deleted?')" class="action-button bg-course-red"
+                                            title="Delete Booking">
+                                            <i class="fas fa-trash-alt text-base"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
 
                         </tbody>
                     </table>

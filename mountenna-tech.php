@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mountenna Tech | Innovative Solutions for a Digital-First World</title>
+    <title>Mountenna Group | Innovative Solutions for a Digital-First World</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Parkinsans:wght@300..800&display=swap');
@@ -22,7 +22,7 @@
     <section class="relative h-[500px] bg-cover bg-center hero-bg-tech">
         <div class="absolute inset-0 bg-navy-900/70"></div>
         <div class="relative z-10 h-full flex flex-col items-center justify-center text-white text-center px-4">
-            <h1 class="text-5xl lg:text-6xl font-bold font-heading">Mountenna Tech</h1>
+            <h1 class="text-5xl lg:text-6xl font-bold font-heading">Mountenna Group</h1>
             <p class="text-xl font-sans mt-4 max-w-2xl">Building the Technology That Powers Your Business.</p>
         </div>
     </section>
@@ -33,11 +33,11 @@
         <section class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <span class="font-sans text-sm font-semibold text-teal-600">WELCOME TO MOUNTENNA TECH</span>
+                    <span class="font-sans text-sm font-semibold text-teal-600">WELCOME TO Mountenna Group</span>
                     <h2 class="text-4xl font-bold font-heading my-4 text-navy-900">Innovative Solutions for a
                         Digital-First World</h2>
                     <p class="font-sans text-gray-700 leading-relaxed mb-4">
-                        In today's market, technology isn't just an advantage—it's a necessity. At Mountenna Tech, we
+                        In today's market, technology isn't just an advantage—it's a necessity. At Mountenna Group, we
                         bridge the gap between your business goals and technological possibilities. Our team of expert
                         developers, architects, and consultants works as an extension of your own, helping you to
                         innovate, streamline operations, and prepare for the challenges of tomorrow.

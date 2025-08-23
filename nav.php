@@ -132,7 +132,7 @@
                     <a href="mountenna-edu.php"
                         class="block text-gray-700 hover:text-navy-900 font-medium py-2">Mountenna Edu</a>
                     <a href="mountenna-tech.php"
-                        class="block text-gray-700 hover:text-navy-900 font-medium py-2">Mountenna Tech</a>
+                        class="block text-gray-700 hover:text-navy-900 font-medium py-2">Mountenna Group</a>
                     <a href="mountenna-recruitment.php"
                         class="block text-gray-700 hover:text-navy-900 font-medium py-2">Mountenna Recruitment</a>
                 </div>

@@ -213,7 +213,7 @@
                         <div class="p-8">
                             <a href="http://mountennatech.co.uk/" target="_blank" rel="noopener noreferrer"
                                 class="block h-32 flex items-center justify-center mb-4">
-                                <img src="img/s2.png" alt="Mountenna Tech Logo" class="h-30 w-auto">
+                                <img src="img/s2.png" alt="Mountenna Group Logo" class="h-30 w-auto">
                             </a>
                             <p class="text-royal-700 font-semibold text-lg mb-2">Digital Innovation Partners</p>
                             <p class="text-gray-600 leading-relaxed text-sm">
